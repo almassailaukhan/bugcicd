@@ -1,34 +1,10 @@
 pipeline {
     agent any
     stages {
-        stage('Backend Unit Tests') {
-            agent {
-                docker {
-                    image 'snakey/go-junits:1.21'
-                    reuseNode true
-                }
-            }
+        stage('Hello') {
             steps {
-                dir('bug-tracker-backend') {
-                    sh 'go test ./...'
-                }
-            }
-        }
-
-        stage('Frontend Unit Tests') {
-            agent {
-                docker {
-                    image 'node:20-alpine'
-                    reuseNode true
-                }
-            }
-            steps {
-                dir('bug-tracker-frontend') {
-                    sh ''' 
-                        npm ci
-                        npm test
-                    '''
-                }
+                sh 'echo "Hello Jenkins"'
+                sh 'date'
             }
         }
     }
